@@ -1,5 +1,3 @@
-package GameData;
-
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -26,7 +24,7 @@ public class Objects extends Game{
 	private int damageDelay = 20;
 	private int damageDelayCounter = 0;
 	private String description;
-	
+
 
 	//right end of object
 	public double Right(){
@@ -75,11 +73,11 @@ public class Objects extends Game{
 	public void OldMoveSpeed(){
 		this.MoveSpeed = staticMoveSpeed;
 	}
-	
+
 	public double StaticMoveSpeed(){
 		return(this.staticMoveSpeed);
 	}
-	
+
 	public void Sprite(Objects object, String picture){
 		object.face = new Image(picture);
 	}
@@ -89,7 +87,7 @@ public class Objects extends Game{
 	public void isTouching(boolean touch){
 		this.Touching = touch;
 	}
-	
+
 	public String Name(){
 		return (name);
 	}
@@ -99,34 +97,34 @@ public class Objects extends Game{
 	public double Yspeed(){
 		return (Yvelocity);
 	}
-	
+
 	public int CurrentHP(){
 		return(HP);
 	}
-	
+
 	public void SetHp(int newhp){
 		if (newhp < hpLimit)
 			this.HP = newhp;
 		else
 			this.HP = hpLimit;
 	}
-	
+
 	public void SetMaxHP(int hp){
 		this.hpLimit = hp;
 	}
-	
+
 	public int GetMaxHP(){
 		return(this.hpLimit);
 	}
-	
+
 	public String Description(){
 		return(this.description);
 	}
-	
-	
+
+
 	//creates the object
 	//square moving objects
-	
+
 	public Objects(double startx, double starty, double speed, String image, int xsize, int ysize, String name, double Xvelocity, double Yvelocity, double life){
 		this.face = new Image(image);
 		this.x = startx;
@@ -143,14 +141,14 @@ public class Objects extends Game{
 		objectlist.add(this);
 	}
 	//square objects
-	
+
 	//health bar
-	
+
 	public Objects(String image){
 		this.face = new Image(image);
 		this.MoveSpeed = 6;
 	}
-	
+
 	public Objects(String image, int xsize, int ysize, String description){
 		this.face = new Image(image);
 		this.description = description;
@@ -158,7 +156,7 @@ public class Objects extends Game{
 		this.sizeY = ysize;
 	}
 
-	
+
 	public double[] Move(Objects moving, double moveX, double moveY, Objects player) {
 		double[] movement = new double[2];
 		// MAKE SURE ONLY X OR Y IS INPUTED. NOT BOTH AT ONCE
@@ -186,7 +184,7 @@ public class Objects extends Game{
 			// calculate amount that can be moved, return to caller
 			// also calculate if touching other objects
 			moving.Touching = false;
-			
+
 			if (moveX > 0){
 				moveX = Math.min(moveX, item.Left() - moving.Right()-1);
 				if (moveX == 0)
@@ -196,19 +194,19 @@ public class Objects extends Game{
 					} else if (item.name == "" && moving.name != "" && moving.name != "player"){
 						item.Touching = true;
 						moving.Touching = true;
-						
+
 					} else if ((item.name == "" && moving.name == "player") || (moving.name == "" && item.name == "player")){
 						if (damageDelayCounter >= damageDelay){
 							if (currentShield <= 0)
 								player.SetHp(player.CurrentHP() - 1);
-							else 
+							else
 								currentShield --;
 							sound("HitSound.mp3");
 							damageDelayCounter = 0;
 							shieldCounter = shieldDelay;
 						} else {
 							damageDelayCounter ++;
-							
+
 						}
 					}
 			}
@@ -221,12 +219,12 @@ public class Objects extends Game{
 					} else if (item.name == "" && moving.name != "" && moving.name != "player"){
 						item.Touching = true;
 						moving.Touching = true;
-						
+
 					} else if ((item.name == "" && moving.name == "player") || (moving.name == "" && item.name == "player")){
 						if (damageDelayCounter >= damageDelay){
 							if (currentShield <= 0)
 								player.SetHp(player.CurrentHP() - 1);
-							else 
+							else
 								currentShield --;
 							damageDelayCounter = 0;
 							sound("HitSound.mp3");
@@ -236,7 +234,7 @@ public class Objects extends Game{
 						}
 					}
 			}
-			
+
 			if (moveY > 0) {
 				moveY = Math.min(moveY, item.Top() - moving.Bottom()-1);
 				if (moveY == 0)
@@ -246,12 +244,12 @@ public class Objects extends Game{
 					} else if (item.name == "" && moving.name != "" && moving.name != "player"){
 						item.Touching = true;
 						moving.Touching = true;
-						
+
 					} else if ((item.name == "" && moving.name == "player") || (moving.name == "" && item.name == "player")){
 						if (damageDelayCounter >= damageDelay){
 							if (currentShield <= 0)
 								player.SetHp(player.CurrentHP() - 1);
-							else 
+							else
 								currentShield --;
 							damageDelayCounter = 0;
 							sound("HitSound.mp3");
@@ -270,12 +268,12 @@ public class Objects extends Game{
 					} else if (item.name == "" && moving.name != "" && moving.name != "player"){
 						item.Touching = true;
 						moving.Touching = true;
-						
+
 					} else if ((item.name == "" && moving.name == "player") || (moving.name == "" && item.name == "player")){
 						if (damageDelayCounter >= damageDelay){
 							if (currentShield <= 0)
 								player.SetHp(player.CurrentHP() - 1);
-							else 
+							else
 								currentShield --;
 							damageDelayCounter = 0;
 							sound("HitSound.mp3");
@@ -286,8 +284,8 @@ public class Objects extends Game{
 					}
 			}
 		}
-		
-		
+
+
 		//System.out.println("moving " + moveX + ", " + moveY);
 		//System.out.println(moveY);
 		moving.x += moveX;
@@ -297,23 +295,23 @@ public class Objects extends Game{
 		return (movement);
 
 	}
-	
+
 	public void Follow(Objects follower, Objects leader){
 		double moveX = 0;
 		double moveY = 0;
 		double moved[] = { 0, 0 };
 
-		if (follower.RightRandom != 0 || follower.DownRandom != 0) {			
+		if (follower.RightRandom != 0 || follower.DownRandom != 0) {
 			//System.out.println(follower.counter);
 			moveX = Math.copySign(Math.min(Math.abs(follower.RightRandom), follower.MoveSpeed),
 								  follower.RightRandom);
 			follower.RightRandom -= moveX;
-		
+
 			moveY = Math.copySign(Math.min(Math.abs(follower.DownRandom), follower.MoveSpeed),
 								  follower.DownRandom);
-			
+
 			follower.DownRandom -= moveY;
-		    
+
 		} else {
 			if (follower.CenterX() < leader.CenterX()) {
 				moveX = follower.MoveSpeed;
@@ -321,7 +319,7 @@ public class Objects extends Game{
 				moveX = -follower.MoveSpeed;
 			} else {
 				moveX = 0;
-			}		
+			}
 			if (follower.CenterY() < leader.CenterY()) {
 				moveY = follower.MoveSpeed;
 			} else if (follower.CenterY() > leader.CenterY()) {
@@ -336,9 +334,9 @@ public class Objects extends Game{
 			moved = follower.Move(follower, moveX, 0, leader);
 		if (moveY != 0)
 			moved = follower.Move(follower, 0, moveY, leader);
-		 
+
 		if (moved[0] == 0 && moved[1] == 0) {
-			
+
 			//System.out.println("stuck");
 			if (follower.DownRandom == 0 && follower.RightRandom == 0) {
 				follower.RightRandom = 6 * (follower.random.nextDouble() - 0.5) * follower.sizeX;
@@ -347,30 +345,30 @@ public class Objects extends Game{
 
 			}
 		}
-	}	
-	
+	}
+
 	public void Follownew(Objects follower, Objects leader){
 
 		double MoveX = 0;
 		double MoveY = 0;
-		
+
 		if (follower.CenterX() < leader.CenterX())
 			MoveX = follower.MoveSpeed();
 		else if (follower.CenterX() > leader.CenterX())
 			MoveX = -follower.MoveSpeed();
 		else
 			MoveY = follower.MoveSpeed() / 2;
-		
+
 		if (follower.CenterY() < leader.CenterY())
 			MoveY += follower.MoveSpeed();
 		else if (follower.CenterY() > leader.CenterY())
 			MoveY += -follower.MoveSpeed();
 		else
 			MoveX += follower.MoveSpeed() / 2;
-		
+
 		follower.Move(follower, MoveX, MoveY, leader);
 	}
-	
+
 	public void Shoot(Objects shooter, double Xdirection, double Ydirection, double speed, double damage){
 		double Xmove;
 		double Ymove;
@@ -378,21 +376,21 @@ public class Objects extends Game{
 		double x = 0;
 		double y = 0;
 		int BulletSize = 16;
-		
+
 		Xmove = Xdirection - shooter.x;
 		Ymove = Ydirection - shooter.y;
-		
+
 		x = shooter.CenterX();
 		y = shooter.CenterY();
-		
+
 		//math to calculate bullet trajectory
 		DistanceToTravel = Math.sqrt((Xmove*Xmove)+(Ymove*Ymove));
 		double change = speed/DistanceToTravel;
 		double xvelocity = (Xmove*change*speed);
 		double yvelocity = (Ymove*change*speed);
 		AiList.add(new Objects(x, y, speed, "Bullet16x16.png", BulletSize, BulletSize, "bullet", xvelocity, yvelocity, damage));
-		
-		
+
+
 	}
-	
+
 }
