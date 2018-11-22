@@ -79,7 +79,7 @@ public class Objects extends Game{
 	}
 
 	public void Sprite(Objects object, String picture){
-		object.face = new Image(picture);
+		object.face = new Image("file:res/" + picture);
 	}
 	public boolean Touching(){
 		return (Touching);
@@ -126,7 +126,7 @@ public class Objects extends Game{
 	//square moving objects
 
 	public Objects(double startx, double starty, double speed, String image, int xsize, int ysize, String name, double Xvelocity, double Yvelocity, double life){
-		this.face = new Image(image);
+		this.face = new Image("file:res/" + image);
 		this.x = startx;
 		this.y = starty;
 		this.MoveSpeed = speed;
@@ -145,12 +145,12 @@ public class Objects extends Game{
 	//health bar
 
 	public Objects(String image){
-		this.face = new Image(image);
+		this.face = new Image("file:res/" + image);
 		this.MoveSpeed = 6;
 	}
 
 	public Objects(String image, int xsize, int ysize, String description){
-		this.face = new Image(image);
+		this.face = new Image("file:res/" + image);
 		this.description = description;
 		this.sizeX = xsize;
 		this.sizeY = ysize;
@@ -388,7 +388,7 @@ public class Objects extends Game{
 		double change = speed/DistanceToTravel;
 		double xvelocity = (Xmove*change*speed);
 		double yvelocity = (Ymove*change*speed);
-		AiList.add(new Objects(x, y, speed, "Bullet16x16.png", BulletSize, BulletSize, "bullet", xvelocity, yvelocity, damage));
+		AiList.add(new Objects(x, y, speed, "file:res/Bullet16x16.png", BulletSize, BulletSize, "bullet", xvelocity, yvelocity, damage));
 
 
 	}
