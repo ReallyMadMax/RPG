@@ -1,4 +1,3 @@
-package GameData;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileInputStream;
@@ -18,7 +17,7 @@ public class Serializer implements Serializable
 
 	static public void out(String string, ArrayList<Double> upgrades){
 		String fileName = string + ".txt";
-		
+
 		try {
 			FileOutputStream fos = new FileOutputStream(fileName);
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
@@ -28,8 +27,8 @@ public class Serializer implements Serializable
 			System.out.println("IOException");
 		}
 	}
-		
-	
+
+
 	static public ArrayList<Double> in(String string) {
 		String fileName = string + ".txt";
 		try {
@@ -49,8 +48,8 @@ public class Serializer implements Serializable
 			return null;
 		}
 	}
-	
-	
+
+
 	static public void ToFile(String string, double money) {
 
 		String file = string + ".txt";
@@ -58,21 +57,21 @@ public class Serializer implements Serializable
 		    FileWriter writer = new FileWriter(file);
 		    BufferedWriter out = new BufferedWriter(writer);
 		    //out.newLine();
-		    
+
 		    out.write(Double.toString(money));
-		  
-		    
+
+
 		    out.close();
 		} catch (IOException e) {
-			
+
 		}
 	}
-	
+
 	static public double NFromFile(String string){
 		String output = "";
 		String file = string + ".txt";
-		
-		
+
+
 		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
 
 			String sCurrentLine;
@@ -82,11 +81,11 @@ public class Serializer implements Serializable
 			}
 
 		} catch (IOException e) {
-			
+
 		}
-		
+
 		double returnValue = Double.parseDouble(output);
-		
+
 		return (returnValue);
 	}
 
